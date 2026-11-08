@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Zayora — Imperial Botanical Gastronomy</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    html { scroll-behavior: smooth; }
+
+    @keyframes subtle-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(212,175,55,0.35); }
+      50% { transform: scale(1.03); box-shadow: 0 0 65px rgba(212,175,55,0.65), 0 0 100px rgba(16,185,129,0.3); }
+    }
+    .emblem-pulse { animation: subtle-pulse 5s ease-in-out infinite; }
+
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .float-soft { animation: float-soft 6s ease-in-out infinite; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fade-up 0.9s ease-out forwards; }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#00210f",
+            "on-primary-fixed": "#241a00",
+            "surface-bright": "#2f3c35",
+            "secondary-fixed": "#89f9b2",
+            "outline-variant": "#4d4635",
+            "tertiary-container": "#d1b049",
+            "on-background": "#d8e6dc",
+            "secondary": "#6cdc98",
+            "on-surface": "#d8e6dc",
+            "surface-container-highest": "#2b3830",
+            "on-error": "#690005",
+            "inverse-on-surface": "#27332c",
+            "on-surface-variant": "#d0c5af",
+            "background": "#0a1610",
+            "on-primary-fixed-variant": "#574500",
+            "surface-container": "#16221c",
+            "inverse-primary": "#735c00",
+            "on-secondary": "#00391e",
+            "surface-dim": "#0a1610",
+            "tertiary": "#efcb62",
+            "surface-variant": "#2b3830",
+            "surface": "#0a1610",
+            "primary": "#f2ca50",
+            "surface-container-low": "#121e18",
+            "inverse-surface": "#d8e6dc",
+            "on-primary": "#3c2f00",
+            "on-tertiary-fixed": "#241a00",
+            "primary-fixed": "#ffe088",
+            "error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#574400",
+            "secondary-container": "#2ea466",
+            "primary-fixed-dim": "#e9c349",
+            "tertiary-fixed-dim": "#e6c35b",
+            "primary-container": "#d4af37",
+            "on-secondary-fixed-variant": "#00522d",
+            "on-tertiary-container": "#564300",
+            "on-primary-container": "#554300",
+            "outline": "#99907c",
+            "on-secondary-container": "#003119",
+            "on-error-container": "#ffdad6",
+            "secondary-fixed-dim": "#6cdc98",
+            "on-tertiary": "#3d2f00",
+            "tertiary-fixed": "#ffe089",
+            "error": "#ffb4ab",
+            "surface-tint": "#e9c349",
+            "surface-container-high": "#202d26",
+            "surface-container-lowest": "#05110b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-mobile": "1.5rem",
+            "space-lg": "2.25rem",
+            "space-xs": "0.375rem",
+            "space-xl": "3.5rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "margin": "4rem",
+            "space-md": "1.25rem",
+            "space-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Playfair Display"],
+            "body-md": ["Montserrat"],
+            "label-lg": ["Montserrat"],
+            "label-sm": ["Montserrat"],
+            "body-sm": ["Montserrat"],
+            "display-lg-mobile": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "headline-lg-mobile": ["Playfair Display"],
+            "display-lg": ["Playfair Display"],
+            "headline-md": ["Playfair Display"],
+            "label-md": ["Montserrat"],
+            "body-lg": ["Montserrat"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl border-b border-primary-container/25 shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
+    <div class="h-20 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-md">
+        <a class="flex items-center gap-space-sm group" href="#the-experience">
+          <img alt="Zayora Circular Emblem Logo" class="h-12 w-12 rounded-full object-contain ring-2 ring-primary/40 p-0.5 bg-surface-container-lowest shadow-[0_0_15px_rgba(212,175,55,0.35)] transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcNBfmRoSb_GM_xx8UanfJjLjLlbuZFsVtQazMdB93ThKLDZpvhbOCiiY2ggrPWAdDpOnjHQ9h8wUf7Oe3Bhs5__S5H3_qZgQytM0qvgz-dMIbF-W-Ws1hy0dOYf6pUb0b_bk5yJQpOtqIVj6_L4K3HYDbgxQE-FbTu2uz6i0lcoPvNe1AB0TqaytbkxdIXD4BAdGRudwtH1BM15Qg3-X8LgU7i_uTW0258bLBUz8Dh4aGwX7Zvp22WA"/>
+          <div class="flex flex-col">
+            <span class="font-headline-sm text-lg sm:text-xl tracking-[0.28em] text-primary uppercase select-none font-bold">ZAYORA</span>
+            <span class="text-[9px] tracking-[0.25em] text-secondary font-label-sm uppercase hidden sm:block">Imperial Botanical Gastronomy</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="hidden xl:flex items-center gap-space-lg">
+        <a class="font-label-md text-label-md tracking-[0.18em] uppercase transition-colors duration-300 text-primary border-b border-primary-container pb-space-xs font-semibold" href="#the-experience">The Experience</a>
+        <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase transition-colors duration-300" href="#tasting-menus">Tasting Menus</a>
+        <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase transition-colors duration-300" href="#culinary-gallery">Botanical &amp; Flora</a>
+        <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase transition-colors duration-300" href="#private-dining">Private Dining</a>
+        <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase transition-colors duration-300" href="#wine-cellar">Wine Cellar</a>
+        <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase transition-colors duration-300" href="#reservation-suite">Reserve a Table</a>
+      </nav>
+
+      <div class="flex items-center gap-space-sm sm:gap-space-md">
+        <a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-sm bg-surface-container-low border border-primary-container text-primary font-label-md text-label-md uppercase tracking-[0.18em] transition-all duration-300 hover:bg-primary-container hover:text-on-primary-container hover:shadow-[0_0_24px_rgba(212,175,55,0.35)]" href="#reservation-suite">Reserve a Table</a>
+        <div class="w-9 h-9 rounded-full bg-surface-container border border-primary/40 flex items-center justify-center shrink-0 ring-1 ring-primary/20">
+          <span class="material-symbols-outlined text-primary text-[18px]">person</span>
+        </div>
+        <button aria-label="Toggle navigation menu" class="xl:hidden flex items-center justify-center w-9 h-9 text-on-surface hover:text-primary transition-colors focus:outline-none" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div class="hidden xl:hidden w-full bg-surface-container-lowest/95 backdrop-blur-2xl border-b border-primary-container/20 px-6 py-5 flex flex-col gap-4 shadow-2xl" id="mobile-nav">
+      <a class="font-label-md text-label-md tracking-[0.18em] text-primary uppercase py-1" href="#the-experience" onclick="document.getElementById('mobile-nav').classList.add('hidden')">The Experience</a>
+      <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase py-1" href="#tasting-menus" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Tasting Menus</a>
+      <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase py-1" href="#culinary-gallery" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Botanical &amp; Flora</a>
+      <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase py-1" href="#private-dining" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Private Dining</a>
+      <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase py-1" href="#wine-cellar" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Wine Cellar</a>
+      <a class="font-label-md text-label-md tracking-[0.18em] text-on-surface-variant hover:text-primary uppercase py-1" href="#reservation-suite" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Reserve a Table</a>
+    </div>
+  </header>
+
+  <!-- FLOATING MEDALLION -->
+  <aside aria-label="Interactive Floating Emblem" class="fixed bottom-6 right-6 z-40 hidden sm:flex flex-col items-center group pointer-events-auto" id="floating-medallion-container">
+    <a class="relative flex items-center justify-center p-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-xl border border-primary/40 shadow-[0_10px_35px_rgba(0,0,0,0.8),0_0_25px_rgba(212,175,55,0.3)] transition-transform duration-200 hover:scale-110" href="#the-experience" id="floating-medallion" title="Return to Top">
+      <img alt="Zayora Floating Insignia" class="w-14 h-14 object-contain rounded-full ring-2 ring-primary/60" id="scroll-rotating-emblem" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcNBfmRoSb_GM_xx8UanfJjLjLlbuZFsVtQazMdB93ThKLDZpvhbOCiiY2ggrPWAdDpOnjHQ9h8wUf7Oe3Bhs5__S5H3_qZgQytM0qvgz-dMIbF-W-Ws1hy0dOYf6pUb0b_bk5yJQpOtqIVj6_L4K3HYDbgxQE-FbTu2uz6i0lcoPvNe1AB0TqaytbkxdIXD4BAdGRudwtH1BM15Qg3-X8LgU7i_uTW0258bLBUz8Dh4aGwX7Zvp22WA"/>
+      <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary rounded-full border-2 border-surface-container-lowest animate-ping"></div>
+      <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary rounded-full border-2 border-surface-container-lowest"></div>
+    </a>
+    <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2 px-3 py-1 bg-surface-container-lowest/95 border border-primary/30 rounded text-[9px] font-label-sm text-primary tracking-widest uppercase shadow-xl pointer-events-none">Scroll Interactive</div>
+  </aside>
+
+  <main class="w-full pt-20 bg-surface min-h-screen relative z-10">
+    <div class="flex flex-col w-full">
+
+      <!-- ==================== HERO / THE EXPERIENCE ==================== -->
+      <section class="relative w-full min-h-[96vh] flex items-center justify-center overflow-hidden bg-transparent -mt-20 pt-20" id="the-experience">
+        <!-- Three.js Canvas — FIXED so the big 3D Z follows scroll across the whole page -->
+        <div id="threejs-fixed-layer" class="fixed inset-0 w-full h-full bg-transparent pointer-events-none z-[1]" style="display:block;">
+          <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+          <div id="threejs-container-ANIMATION_14" style="width:100%;height:100%"></div>
+          <script>
+          (function() {
+            const container = document.getElementById('threejs-container-ANIMATION_14');
+            const fixedLayer = document.getElementById('threejs-fixed-layer');
+            if (!container) return;
+            const width = container.clientWidth || window.innerWidth;
+            const height = container.clientHeight || window.innerHeight;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.set(0, 0, 7.2);
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.35;
+            container.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x0e2417, 2.5);
+            scene.add(ambientLight);
+
+            const goldSpotLight = new THREE.SpotLight(0xd4af37, 5.0, 30, Math.PI / 3, 0.4, 1.2);
+            goldSpotLight.position.set(4, 6, 8);
+            scene.add(goldSpotLight);
+
+            const emeraldLight = new THREE.PointLight(0x1a7f4b, 3.5, 20);
+            emeraldLight.position.set(-5, -2, 4);
+            scene.add(emeraldLight);
+
+            const rimLight = new THREE.DirectionalLight(0xfef5d1, 2.5);
+            rimLight.position.set(0, 5, -3);
+            scene.add(rimLight);
+
+            const medallionGroup = new THREE.Group();
+            scene.add(medallionGroup);
+
+            const polishedGold = new THREE.MeshPhongMaterial({
+              color: 0xd4af37, specular: 0xffffff, shininess: 95, reflectivity: 0.9
+            });
+            const deepEmerald = new THREE.MeshPhongMaterial({
+              color: 0x072d1d, specular: 0x228b55, shininess: 70
+            });
+
+            // Coin body
+            const coinGeo = new THREE.CylinderGeometry(2.3, 2.3, 0.22, 64);
+            coinGeo.rotateX(Math.PI / 2);
+            medallionGroup.add(new THREE.Mesh(coinGeo, deepEmerald));
+
+            // Outer gold bezel
+            medallionGroup.add(new THREE.Mesh(new THREE.TorusGeometry(2.32, 0.08, 24, 64), polishedGold));
+            medallionGroup.add(new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.035, 16, 64), polishedGold));
+            medallionGroup.add(new THREE.Mesh(new THREE.TorusGeometry(1.65, 0.025, 16, 64), polishedGold));
+
+            // Center disc
+            const centerDiscGeo = new THREE.CylinderGeometry(1.4, 1.4, 0.26, 48);
+            centerDiscGeo.rotateX(Math.PI / 2);
+            medallionGroup.add(new THREE.Mesh(centerDiscGeo, deepEmerald));
+
+            // Z Emblem
+            const zShape = new THREE.Shape();
+            zShape.moveTo(-0.7, 0.75);
+            zShape.lineTo(0.7, 0.75);
+            zShape.lineTo(0.7, 0.52);
+            zShape.lineTo(-0.25, -0.45);
+            zShape.lineTo(0.7, -0.45);
+            zShape.lineTo(0.7, -0.75);
+            zShape.lineTo(-0.7, -0.75);
+            zShape.lineTo(-0.7, -0.52);
+            zShape.lineTo(0.25, 0.45);
+            zShape.lineTo(-0.7, 0.45);
+            zShape.closePath();
+
+            const zGeo = new THREE.ExtrudeGeometry(zShape, { depth: 0.18, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.04, bevelThickness: 0.04 });
+            zGeo.center();
+            const zMesh = new THREE.Mesh(zGeo, polishedGold);
+            zMesh.position.z = 0.15;
+            medallionGroup.add(zMesh);
+
+            // Laurel leaves
+            for (let i = 0; i < 12; i++) {
+              const angle = (i / 12) * Math.PI * 2;
+              const leafMesh = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.42, 16), polishedGold);
+              leafMesh.position.set(Math.cos(angle) * 1.85, Math.sin(angle) * 1.85, 0.12);
+              leafMesh.rotation.z = angle + Math.PI / 2;
+              leafMesh.rotation.x = Math.PI / 2;
+              medallionGroup.add(leafMesh);
+            }
+
+            // Stars
+            for (let s = -1; s <= 1; s++) {
+              const starMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.12, 0), polishedGold);
+              starMesh.position.set(s * 0.4, -1.25, 0.16);
+              starMesh.rotation.z = Math.PI / 4;
+              medallionGroup.add(starMesh);
+            }
+
+            // Particles
+            const particleCount = 120;
+            const particleGeo = new THREE.BufferGeometry();
+            const particlePos = new Float32Array(particleCount * 3);
+            for (let i = 0; i < particleCount; i++) {
+              const angle = Math.random() * Math.PI * 2;
+              const radius = 1.0 + Math.random() * 2.8;
+              particlePos[i * 3] = Math.cos(angle) * radius;
+              particlePos[i * 3 + 1] = Math.sin(angle) * radius;
+              particlePos[i * 3 + 2] = -1.0 + Math.random() * 2.5;
+            }
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+            const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({
+              color: 0xedd685, size: 0.06, transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending
+            }));
+            scene.add(particles);
+
+            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0, scrollY = 0;
+            window.addEventListener('mousemove', (e) => {
+              const x = e.clientX / (window.innerWidth || 1);
+              const y = e.clientY / (window.innerHeight || 1);
+              targetX = (x - 0.5) * 1.8;
+              targetY = (y - 0.5) * 1.2;
+            });
+            window.addEventListener('scroll', () => {
+              scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+            }, { passive: true });
+
+            const clock = new THREE.Clock();
+            function animate() {
+              requestAnimationFrame(animate);
+              const t = clock.getElapsedTime();
+
+              // Strong scroll-driven 3D effect — the big Z follows and reacts to scroll
+              const scrollProgress = Math.min(scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1), 1);
+              const scrollRotation = scrollY * 0.0045;          // much stronger spin
+              const scrollTilt = scrollY * 0.0018;
+              const scrollElevation = Math.sin(scrollY * 0.0012) * 0.55;
+              const scrollDepth = -scrollY * 0.0011;            // moves toward / away from camera
+              const scrollScale = 1 + Math.sin(scrollY * 0.0009) * 0.08;
+
+              medallionGroup.rotation.y = t * 0.22 + mouseX * 0.85 + scrollRotation;
+              medallionGroup.rotation.x = Math.sin(t * 0.55) * 0.1 + mouseY * 0.55 + Math.sin(scrollRotation * 0.7) * 0.35 + scrollTilt * 0.4;
+              medallionGroup.rotation.z = Math.sin(t * 0.35) * 0.06 + scrollRotation * 0.55;
+              medallionGroup.position.y = Math.sin(t * 1.05) * 0.1 + scrollElevation;
+              medallionGroup.position.z = scrollDepth;
+              medallionGroup.scale.setScalar(scrollScale);
+
+              // Keep the 3D logo slightly transparent so text remains easy to read
+              if (fixedLayer) {
+                // Start more transparent, then fade further on scroll
+                const opacity = Math.max(0.10, 0.38 - scrollProgress * 0.38);
+                fixedLayer.style.opacity = opacity;
+              }
+
+              mouseX += (targetX - mouseX) * 0.07;
+              mouseY += (targetY - mouseY) * 0.07;
+              particles.rotation.z = t * 0.06 + scrollY * 0.0004;
+
+              renderer.render(scene, camera);
+            }
+            animate();
+
+            function handleResize() {
+              const newWidth = container.clientWidth || window.innerWidth;
+              const newHeight = container.clientHeight || window.innerHeight;
+              camera.aspect = newWidth / newHeight;
+              camera.updateProjectionMatrix();
+              renderer.setSize(newWidth, newHeight);
+            }
+            window.addEventListener('resize', handleResize);
+          })();
+          </script>
+        </div>
+
+        <!-- Ambient overlays -->
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-surface via-surface-container-lowest/50 to-surface-container-lowest/70"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[720px] h-[720px] bg-secondary-container/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-primary-container/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 text-center flex flex-col items-center py-space-xl pointer-events-none">
+          <div class="relative flex flex-col items-center mb-space-md pointer-events-auto group">
+            <div class="relative p-2 rounded-full bg-surface-container-lowest/80 backdrop-blur-md border-2 border-primary/50 emblem-pulse transition-transform duration-500 group-hover:scale-105">
+              <img alt="Zayora Imperial Emblem" class="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcNBfmRoSb_GM_xx8UanfJjLjLlbuZFsVtQazMdB93ThKLDZpvhbOCiiY2ggrPWAdDpOnjHQ9h8wUf7Oe3Bhs5__S5H3_qZgQytM0qvgz-dMIbF-W-Ws1hy0dOYf6pUb0b_bk5yJQpOtqIVj6_L4K3HYDbgxQE-FbTu2uz6i0lcoPvNe1AB0TqaytbkxdIXD4BAdGRudwtH1BM15Qg3-X8LgU7i_uTW0258bLBUz8Dh4aGwX7Zvp22WA"/>
+            </div>
+          </div>
+
+          <p class="font-label-sm text-[11px] tracking-[0.4em] text-secondary uppercase mb-4 fade-up" style="animation-delay:0.1s">Est. 2019 · Imperial Botanical Gastronomy</p>
+          
+          <h1 class="font-display-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary tracking-tight leading-tight mb-6 fade-up" style="animation-delay:0.2s">
+            Where Nature<br class="hidden sm:block"/> Becomes Ceremony
+          </h1>
+          
+          <p class="max-w-2xl font-body-lg text-on-surface-variant text-base sm:text-lg leading-relaxed mb-10 fade-up" style="animation-delay:0.35s">
+            An intimate culinary theatre where rare botanicals, foraged heritage ingredients and imperial technique converge into a multi-sensory tasting journey.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto fade-up" style="animation-delay:0.5s">
+            <a href="#reservation-suite" class="inline-flex items-center justify-center px-10 py-4 bg-primary-container text-on-primary-container font-label-md text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:scale-[1.03]">
+              Reserve Your Seat
+            </a>
+            <a href="#tasting-menus" class="inline-flex items-center justify-center px-10 py-4 border border-primary/50 text-primary font-label-md text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:bg-primary/10 hover:border-primary">
+              Explore Menus
+            </a>
+          </div>
+
+          <div class="mt-16 flex items-center gap-8 text-on-surface-variant/70 text-xs tracking-widest uppercase fade-up" style="animation-delay:0.7s">
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 18-Course Journey</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Foraged Daily</span>
+            <span class="hidden sm:flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Wine Pairings</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TASTING MENUS ==================== -->
+      <section id="tasting-menus" class="relative py-24 sm:py-32 bg-surface-container-lowest section-reveal">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div class="text-center mb-16">
+            <p class="font-label-sm text-[11px] tracking-[0.35em] text-secondary uppercase mb-3">The Culinary Path</p>
+            <h2 class="font-headline-lg text-3xl sm:text-4xl md:text-5xl text-primary mb-4">Tasting Menus</h2>
+            <div class="w-20 h-px bg-primary/40 mx-auto"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Menu Card 1 -->
+            <article class="group relative bg-surface-container-lowest/95 border border-primary/15 overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+              <div class="aspect-[4/3] bg-surface-container-highest overflow-hidden">
+                <div class="w-full h-full bg-gradient-to-br from-secondary-container/20 via-surface-container to-primary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-6xl text-primary/30">eco</span>
+                </div>
+              </div>
+              <div class="p-8">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-headline-md text-xl text-primary">The Verdant Path</h3>
+                  <span class="text-secondary font-label-sm text-sm">12 Courses</span>
+                </div>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-6">A pure botanical journey celebrating the garden, forest floor and coastal herbs. Vegetarian by design, regal in execution.</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-label-md tracking-widest">₹ 9,800</span>
+                  <a href="#reservation-suite" class="text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Reserve →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Menu Card 2 -->
+            <article class="group relative bg-surface-container-lowest/95 border border-primary/30 overflow-hidden transition-all duration-500 hover:border-primary/60 hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)] backdrop-blur-sm">
+              <div class="absolute top-4 right-4 z-10 px-3 py-1 bg-primary-container text-on-primary-container text-[10px] tracking-widest uppercase font-label-sm">Signature</div>
+              <div class="aspect-[4/3] bg-surface-container-highest overflow-hidden">
+                <div class="w-full h-full bg-gradient-to-br from-primary/15 via-surface-container to-secondary-container/20 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-6xl text-primary/40">restaurant</span>
+                </div>
+              </div>
+              <div class="p-8">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-headline-md text-xl text-primary">Imperial Flora</h3>
+                  <span class="text-secondary font-label-sm text-sm">18 Courses</span>
+                </div>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-6">Our flagship multi-sensory experience. Rare blooms, aged vinegars, smoke, and precise technique across eighteen chapters.</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-label-md tracking-widest">₹ 16,500</span>
+                  <a href="#reservation-suite" class="text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Reserve →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Menu Card 3 -->
+            <article class="group relative bg-surface-container-lowest/95 border border-primary/15 overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+              <div class="aspect-[4/3] bg-surface-container-highest overflow-hidden">
+                <div class="w-full h-full bg-gradient-to-br from-surface-container via-primary/10 to-secondary-container/15 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-6xl text-primary/30">local_bar</span>
+                </div>
+              </div>
+              <div class="p-8">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-headline-md text-xl text-primary">Cellar &amp; Bloom</h3>
+                  <span class="text-secondary font-label-sm text-sm">14 Courses</span>
+                </div>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-6">A dialogue between wine and plate. Each course is crafted around a specific vintage or rare botanical infusion.</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-label-md tracking-widest">₹ 14,200</span>
+                  <a href="#reservation-suite" class="text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Reserve →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BOTANICAL & FLORA / CULINARY GALLERY ==================== -->
+      <section id="culinary-gallery" class="relative py-24 sm:py-32 bg-surface-container-lowest section-reveal">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <p class="font-label-sm text-[11px] tracking-[0.35em] text-secondary uppercase mb-3">The Living Larder</p>
+              <h2 class="font-headline-lg text-3xl sm:text-4xl text-primary mb-6">Botanical &amp; Flora</h2>
+              <p class="text-on-surface-variant leading-relaxed mb-6">
+                Every leaf, petal and root that enters the kitchen is either foraged by our team or cultivated in the private Zayora gardens. We work with over 140 botanical varieties across the seasons — many of which never appear on any other table.
+              </p>
+              <ul class="space-y-4 text-sm text-on-surface-variant">
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary text-lg mt-0.5">spa</span>
+                  <span>Heritage seed banks &amp; regenerative plots</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary text-lg mt-0.5">forest</span>
+                  <span>Wild foraging partnerships across the Western Ghats</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary text-lg mt-0.5">local_florist</span>
+                  <span>Edible flowers grown under controlled light cycles</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="aspect-square bg-surface-container border border-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-5xl text-primary/25">grass</span>
+              </div>
+              <div class="aspect-square bg-surface-container-high border border-primary/20 flex items-center justify-center mt-8">
+                <span class="material-symbols-outlined text-5xl text-primary/25">potted_plant</span>
+              </div>
+              <div class="aspect-square bg-surface-container-high border border-primary/20 flex items-center justify-center -mt-8">
+                <span class="material-symbols-outlined text-5xl text-primary/25">water_drop</span>
+              </div>
+              <div class="aspect-square bg-surface-container border border-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-5xl text-primary/25">eco</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PRIVATE DINING ==================== -->
+      <section id="private-dining" class="relative py-24 sm:py-32 bg-surface-container-lowest section-reveal">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div class="text-center mb-16">
+            <p class="font-label-sm text-[11px] tracking-[0.35em] text-secondary uppercase mb-3">Exclusive Spaces</p>
+            <h2 class="font-headline-lg text-3xl sm:text-4xl md:text-5xl text-primary mb-4">Private Dining</h2>
+            <div class="w-20 h-px bg-primary/40 mx-auto mb-6"></div>
+            <p class="max-w-2xl mx-auto text-on-surface-variant">Intimate chambers designed for celebration, conspiracy and quiet reverence. Each room carries its own botanical identity.</p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-surface-container-lowest/95 border border-primary/15 p-8 text-center transition-all duration-400 hover:border-primary/40 backdrop-blur-sm">
+              <div class="w-16 h-16 mx-auto mb-6 rounded-full border border-primary/40 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-2xl">groups</span>
+              </div>
+              <h3 class="font-headline-md text-xl text-primary mb-2">The Orchid Room</h3>
+              <p class="text-on-surface-variant text-sm mb-4">Seats 8–12 · Garden views</p>
+              <p class="text-xs text-on-surface-variant/70">Private chef’s table experience with custom menu development.</p>
+            </div>
+            <div class="bg-surface-container-lowest/95 border border-primary/30 p-8 text-center transition-all duration-400 hover:border-primary/50 backdrop-blur-sm">
+              <div class="w-16 h-16 mx-auto mb-6 rounded-full border border-primary/50 flex items-center justify-center bg-primary/5">
+                <span class="material-symbols-outlined text-primary text-2xl">castle</span>
+              </div>
+              <h3 class="font-headline-md text-xl text-primary mb-2">Imperial Chamber</h3>
+              <p class="text-on-surface-variant text-sm mb-4">Seats 16–24 · Full service</p>
+              <p class="text-xs text-on-surface-variant/70">Our grandest private space with dedicated sommelier and floral installation.</p>
+            </div>
+            <div class="bg-surface-container-lowest/95 border border-primary/15 p-8 text-center transition-all duration-400 hover:border-primary/40 backdrop-blur-sm">
+              <div class="w-16 h-16 mx-auto mb-6 rounded-full border border-primary/40 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-2xl">nightlife</span>
+              </div>
+              <h3 class="font-headline-md text-xl text-primary mb-2">The Root Cellar</h3>
+              <p class="text-on-surface-variant text-sm mb-4">Seats 4–6 · Underground</p>
+              <p class="text-xs text-on-surface-variant/70">Candlelit, subterranean, and utterly discreet. Ideal for two or a tight circle.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== WINE CELLAR ==================== -->
+      <section id="wine-cellar" class="relative py-24 sm:py-32 bg-surface-container-lowest section-reveal">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1">
+              <div class="aspect-[4/5] bg-surface-container border border-primary/20 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+                <span class="material-symbols-outlined text-8xl text-primary/20">wine_bar</span>
+                <div class="absolute bottom-8 left-8 right-8">
+                  <p class="font-label-sm text-[10px] tracking-[0.3em] text-secondary uppercase mb-1">Curated Selection</p>
+                  <p class="font-headline-md text-2xl text-primary">1,200+ Labels</p>
+                </div>
+              </div>
+            </div>
+            <div class="order-1 lg:order-2">
+              <p class="font-label-sm text-[11px] tracking-[0.35em] text-secondary uppercase mb-3">Liquid Architecture</p>
+              <h2 class="font-headline-lg text-3xl sm:text-4xl text-primary mb-6">The Wine Cellar</h2>
+              <p class="text-on-surface-variant leading-relaxed mb-8">
+                Our cellar is a living archive of the world’s most expressive wines, with particular depth in Burgundy, Loire, and natural producers who share our respect for terroir. Pairings are composed nightly by our head sommelier.
+              </p>
+              <div class="grid grid-cols-2 gap-6 mb-10">
+                <div>
+                  <p class="text-primary font-headline-md text-3xl mb-1">48</p>
+                  <p class="text-xs tracking-widest uppercase text-on-surface-variant">By the Glass</p>
+                </div>
+                <div>
+                  <p class="text-primary font-headline-md text-3xl mb-1">12</p>
+                  <p class="text-xs tracking-widest uppercase text-on-surface-variant">Verticals</p>
+                </div>
+                <div>
+                  <p class="text-primary font-headline-md text-3xl mb-1">6</p>
+                  <p class="text-xs tracking-widest uppercase text-on-surface-variant">Rare Magnums</p>
+                </div>
+                <div>
+                  <p class="text-primary font-headline-md text-3xl mb-1">∞</p>
+                  <p class="text-xs tracking-widest uppercase text-on-surface-variant">Stories</p>
+                </div>
+              </div>
+              <a href="#reservation-suite" class="inline-flex items-center gap-2 text-primary font-label-md text-sm tracking-widest uppercase hover:gap-3 transition-all">
+                Request Wine Pairing <span class="material-symbols-outlined text-lg">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== RESERVATION SUITE ==================== -->
+      <section id="reservation-suite" class="relative py-24 sm:py-32 bg-surface-container-lowest section-reveal">
+        <div class="max-w-[720px] mx-auto px-4 sm:px-8">
+          <div class="text-center mb-12">
+            <p class="font-label-sm text-[11px] tracking-[0.35em] text-secondary uppercase mb-3">Begin the Journey</p>
+            <h2 class="font-headline-lg text-3xl sm:text-4xl text-primary mb-4">Reserve a Table</h2>
+            <div class="w-20 h-px bg-primary/40 mx-auto mb-6"></div>
+            <p class="text-on-surface-variant text-sm">We host only a limited number of guests each evening. Reservations open 60 days in advance.</p>
+          </div>
+
+          <form class="bg-surface-container-lowest/95 border border-primary/20 p-8 sm:p-10 space-y-6 backdrop-blur-sm" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden'); this.classList.add('hidden');">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Full Name</label>
+                <input type="text" required class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors" placeholder="Your name"/>
+              </div>
+              <div>
+                <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Email</label>
+                <input type="email" required class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors" placeholder="you@example.com"/>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Preferred Date</label>
+                <input type="date" required class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"/>
+              </div>
+              <div>
+                <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Guests</label>
+                <select class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors">
+                  <option>2 Guests</option>
+                  <option>3 Guests</option>
+                  <option>4 Guests</option>
+                  <option>5–6 Guests</option>
+                  <option>Private Room (8+)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Preferred Menu</label>
+              <select class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors">
+                <option>Imperial Flora (18 Courses)</option>
+                <option>The Verdant Path (12 Courses)</option>
+                <option>Cellar &amp; Bloom (14 Courses)</option>
+                <option>Chef’s Table / Custom</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2">Special Requests</label>
+              <textarea rows="3" class="w-full bg-surface-container-lowest border border-primary/20 text-on-surface px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Dietary needs, celebrations, wine preferences…"></textarea>
+            </div>
+            <button type="submit" class="w-full py-4 bg-primary-container text-on-primary-container font-label-md text-sm uppercase tracking-[0.25em] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.45)]">
+              Request Reservation
+            </button>
+            <p class="text-center text-[11px] text-on-surface-variant/60 tracking-wide">You will receive a confirmation email within 24 hours.</p>
+          </form>
+
+          <div id="form-success" class="hidden text-center py-16">
+            <div class="w-16 h-16 mx-auto mb-6 rounded-full border border-secondary flex items-center justify-center">
+              <span class="material-symbols-outlined text-secondary text-3xl">check</span>
+            </div>
+            <h3 class="font-headline-md text-2xl text-primary mb-3">Request Received</h3>
+            <p class="text-on-surface-variant text-sm">Our reservations team will be in touch shortly. We look forward to welcoming you to Zayora.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="border-t border-primary/15 bg-surface-container-lowest">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
+          <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="md:col-span-2">
+              <div class="flex items-center gap-3 mb-5">
+                <img alt="Zayora" class="h-10 w-10 rounded-full object-contain ring-1 ring-primary/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcNBfmRoSb_GM_xx8UanfJjLjLlbuZFsVtQazMdB93ThKLDZpvhbOCiiY2ggrPWAdDpOnjHQ9h8wUf7Oe3Bhs5__S5H3_qZgQytM0qvgz-dMIbF-W-Ws1hy0dOYf6pUb0b_bk5yJQpOtqIVj6_L4K3HYDbgxQE-FbTu2uz6i0lcoPvNe1AB0TqaytbkxdIXD4BAdGRudwtH1BM15Qg3-X8LgU7i_uTW0258bLBUz8Dh4aGwX7Zvp22WA"/>
+                <div>
+                  <span class="font-headline-sm text-lg tracking-[0.25em] text-primary uppercase font-bold">ZAYORA</span>
+                  <p class="text-[9px] tracking-[0.2em] text-secondary uppercase">Imperial Botanical Gastronomy</p>
+                </div>
+              </div>
+              <p class="text-on-surface-variant text-sm leading-relaxed max-w-sm">
+                A temple of botanical cuisine where every course is an act of reverence toward the land, the season, and the guest.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-label-md text-xs tracking-[0.25em] uppercase text-primary mb-5">Visit</h4>
+              <p class="text-on-surface-variant text-sm leading-relaxed">
+                14, Imperial Grove<br/>
+                Alipore, Kolkata 700027<br/>
+                India
+              </p>
+              <p class="text-on-surface-variant text-sm mt-4">+91 33 4000 1818</p>
+            </div>
+            <div>
+              <h4 class="font-label-md text-xs tracking-[0.25em] uppercase text-primary mb-5">Hours</h4>
+              <p class="text-on-surface-variant text-sm leading-relaxed">
+                Dinner only<br/>
+                Tue – Sun<br/>
+                19:00 – 23:30
+              </p>
+              <p class="text-on-surface-variant text-sm mt-4">Closed Mondays</p>
+            </div>
+          </div>
+          <div class="pt-8 border-t border-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-[11px] text-on-surface-variant/60 tracking-wide">© 2026 Zayora. All rights reserved.</p>
+            <div class="flex items-center gap-6">
+              <a href="#" class="text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors">Instagram</a>
+              <a href="#" class="text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors">Press</a>
+              <a href="#" class="text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors">Careers</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    // Section reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (scrollY >= sectionTop) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('text-primary', 'border-b', 'border-primary-container', 'pb-space-xs', 'font-semibold');
+        link.classList.add('text-on-surface-variant');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.remove('text-on-surface-variant');
+          link.classList.add('text-primary', 'border-b', 'border-primary-container', 'pb-space-xs', 'font-semibold');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
